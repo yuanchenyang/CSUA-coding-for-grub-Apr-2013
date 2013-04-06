@@ -1,3 +1,4 @@
+from __future__ import print_function
 from string import ascii_letters
 from collections import defaultdict
 
@@ -26,7 +27,7 @@ def compute_similarity(wdict1, wdict2):
 
 def match():
     words = {n: extract_words(n) for n in filenames}
-    pairs = ''
+    out = open("OUTPUT.txt", 'w+')
     for name in filenames[:]:
         if name in filenames:
             filenames.remove(name)
@@ -35,5 +36,4 @@ def match():
             # print sorted(distancelist, key = lambda x: x[1])
             chosen, _ = max(distancelist, key = lambda x: x[1])
             filenames.remove(chosen)
-            pairs += "{0}.txt,{1}.txt\n".format(name, chosen)
-    print pairs
+            print("{0}.txt,{1}.txt".format(name, chosen), file=out)    
